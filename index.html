@@ -47,6 +47,51 @@
 </tr>
 </tbody>
 </table>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>This specification aims to be simple, and pluggable. A game server consists of a number of the components, the game server itself, a metadata file as part of the game server repository, a controller, a storage component, and watcher component. According to best practices, each component of a game server should be split into a different repository, with the primary game server residing within the main repo, although this is not enforced. Each component should be single purpose, with the main repo only serving the game server itself.</p>
+
+<h2>
+<a id="metadata" class="anchor" href="#metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Metadata</h2>
+
+<p>The metadata documents how the game server is created, executed, configured, controlled and viewed. The file must adhere to a json schema, to make it easy to consume by both individual users an pluggable systems. For a more detailed overview of the metadata file, it's components, and how to create one, view the <a href="metadata">metadata documentation</a></p>
+
+<h2>
+<a id="storage" class="anchor" href="#storage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Storage</h2>
+
+<p>Primarily containers are meant to be ephemeral, meaning you run them once, and delete them. In order to adhere to best practices, instead of having a container that is started, stopped, and restarted over a long period of time, the persisted components of the application are extracted to a data container. This is achieved through volume mounting, mapping a directory containing <em>ONLY</em> persisted data between the game server container and the data container. The data container must be started first, and then the game server started with the --volumes-from data-container type flag. As such both containers must specify the same data directory to be mapped. </p>
+
+<p>A data container should have the same base image as the game server itself, however should need no scripts, applications or configuration. It purely exists to be a lightweight volume provider.  </p>
+
+<p>Here is an example of a <a href="https://github.com/bfosberry/gamekick_storage">simple data container</a></p>
+
+<h2>
+<a id="main-repo" class="anchor" href="#main-repo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main Repo</h2>
+
+<p>The game server repository is the most complex component. This should be responsible for building the game server image through a Dockerfile, pulling down configuration, writing and configuration files, prepping directory structure and ownership, writing any startup scripts, and executing the game server itself. The execution should occur in the foreground and should block. This allows the orchestration platform to decide what action to take should the game server stop, as well as directly control the process and send signals to it. Most of the steps for creating the main game server repo involve implementing the metadata definition.</p>
+
+<h3>
+<a id="dockerfile" class="anchor" href="#dockerfile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dockerfile</h3>
+
+<p>Find which linux distro is most supported or most efficient for your game server a stick with it. <code>ubuntu</code> is a safe bet since it is well supported.</p>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<h2>
+<a id="controller" class="anchor" href="#controller" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controller</h2>
+
+<h2>
+<a id="watcher" class="anchor" href="#watcher" aria-hidden="true"><span class="octicon octicon-link"></span></a>Watcher</h2>
+
+<h2>
+<a id="example-repos" class="anchor" href="#example-repos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example repos</h2>
+
+<ul>
+<li><a href="https://github.com/bfosberry/gmod_server">Garry's Mod</a></li>
+</ul>
       </section>
     </div>
 
