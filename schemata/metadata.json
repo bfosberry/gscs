@@ -1,0 +1,302 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "shares" :  {
+      "type": "object",
+      "properties": {
+        "cpu_share": {
+          "type": "integer"
+        },
+        "mem_share": {
+          "type": "integer"
+        },
+        "cpu_shares_per_slot": {
+          "type": "integer"
+        },
+        "mem_shares_per_slot": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cpu_shares",
+        "mem_shares",
+        "cpu_shares_per_slot",
+        "mem_shares_per_slot"
+      ]
+    },
+    "repo": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 3
+    },
+    "map": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2
+        },
+        "version": {
+          "type": "string"
+        },
+        "docker_repo": {
+          "$ref": "#/definitions/repo"
+        },
+        "watcher_repo": {
+          "$ref": "#/definitions/repo"
+        },
+        "controller_repo": {
+          "$ref": "#/definitions/repo"
+        },
+        "shares": {
+          "$ref": "#/definitions/shares"
+        },
+        "configure_with": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "docker_repo",
+        "shares",
+        "configure_with"
+      ]
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the config parameter",
+            "type": "string"
+          },
+          "data_type": {
+            "description": "The data type of the config parameter",
+            "type": "string"
+          },
+          "key": {
+            "description": "A description of the config parameter",
+            "type": "string"
+          },
+          "default_value": {
+            "description": "The default value of the config parameter",
+            "type": "string"
+          },
+          "visible": {
+            "description": "Whether the config parameter should be openly configurable (non-automated)",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "The description of the config parameter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "data_type",
+          "key",
+          "default_value"
+        ]
+      }
+    },
+    "responds_to": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "key",
+          "args"
+        ]
+      }
+    },
+    "requires": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "default_value": {
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "customizable": {
+              "type": "boolean"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "key",
+            "type",
+            "default_value",
+            "required",
+            "customizable"
+          ]
+        }
+      ]
+    },
+    "maps": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "#/definitions/map"
+        }
+      ]
+    },
+    "mods": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "docker_repo": {
+              "$ref": "#/definitions/repo"
+            },
+            "type": {
+              "type": "string"
+            },
+            "versions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "maps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/map"
+              }
+            },
+            "shares": {
+              "$ref": "#/definitions/shares"
+            }
+          },
+          "required": [
+            "name",
+            "key",
+            "docker_repo",
+            "type",
+            "version",
+            "maps",
+            "shares"
+          ]
+        }
+       
+      ]
+    },
+    "ports": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "integer"
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dynamic": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "port",
+            "protocol",
+            "name",
+            "dynamic"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "info",
+    "provides",
+    "responds_to",
+    "requires",
+    "maps",
+    "mods",
+    "ports"
+  ]
+}
