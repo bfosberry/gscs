@@ -58,6 +58,9 @@
         },
         "version": {
           "type": "string"
+        },        
+        "schema_version": {
+          "type": "string"
         },
         "docker_repo": {
           "$ref": "#/definitions/repo"
@@ -66,6 +69,9 @@
           "$ref": "#/definitions/repo"
         },
         "controller_repo": {
+          "$ref": "#/definitions/repo"
+        },
+        "storage_repo": {
           "$ref": "#/definitions/repo"
         },
         "shares": {
@@ -89,27 +95,21 @@
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the config parameter",
             "type": "string"
           },
           "data_type": {
-            "description": "The data type of the config parameter",
             "type": "string"
           },
           "key": {
-            "description": "A description of the config parameter",
             "type": "string"
           },
           "default_value": {
-            "description": "The default value of the config parameter",
             "type": "string"
           },
           "visible": {
-            "description": "Whether the config parameter should be openly configurable (non-automated)",
             "type": "boolean"
           },
           "description": {
-            "description": "The description of the config parameter",
             "type": "string"
           }
         },
@@ -132,6 +132,9 @@
           "key": {
             "type": "string"
           },
+          "description": {
+            "type": "string"
+          },
           "args": {
             "type": "array",
             "items": {
@@ -140,7 +143,7 @@
                 "name": {
                   "type": "string"
                 },
-                "type": {
+                "data_type": {
                   "type": "string"
                 },
                 "description": {
@@ -173,7 +176,7 @@
             "key": {
               "type": "string"
             },
-            "type": {
+            "data_type": {
               "type": "string"
             },
             "default_value": {
@@ -226,7 +229,7 @@
             "docker_repo": {
               "$ref": "#/definitions/repo"
             },
-            "type": {
+            "mod_type": {
               "type": "string"
             },
             "versions": {
@@ -250,7 +253,7 @@
             "key",
             "docker_repo",
             "type",
-            "version",
+            "versions",
             "maps",
             "shares"
           ]
