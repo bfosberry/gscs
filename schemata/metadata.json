@@ -159,8 +159,7 @@
         },
         "required": [
           "name",
-          "key",
-          "args"
+          "key"
         ]
       }
     },
@@ -254,7 +253,6 @@
             "docker_repo",
             "type",
             "versions",
-            "maps",
             "shares"
           ]
         }
@@ -295,11 +293,6 @@
   },
   "required": [
     "info",
-    "provides",
-    "responds_to",
-    "requires",
-    "maps",
-    "mods",
     "ports"
   ]
 }
