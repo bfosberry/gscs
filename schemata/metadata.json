@@ -1,5 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "self": {
+    "vendor": "com.bfosberry",
+    "name": "gscs",
+    "format": "jsonschema",
+    "version": "0-1-0"
+  },
   "definitions": {
     "shares" :  {
       "type": "object",

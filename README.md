@@ -3,6 +3,12 @@ Game Server Container Specification
 
 This project serves as a central respository for Game Server Container Specification schemas, documentation and tooling.
 
+# Versions
+
+| Version       | Changes                |       Date  |
+| ------------- |:----------------------:| -----------:|
+| 0.1           | initial schema version | 25 Nov 2015 |
+
 # Getting Started
 
 For general information on this repo, see the github pages on this project: http://bfosberry.github.io/gscs/
