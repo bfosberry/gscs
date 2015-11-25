@@ -7,7 +7,8 @@ This project serves as a central respository for Game Server Container Specifica
 
 | Version       | Changes                |       Date  |
 | ------------- |:----------------------:| -----------:|
-| 0.1           | initial schema version | 25 Nov 2015 |
+| 0.1.0         | initial schema version | 25 Nov 2015 |
+| 0.1.1         | adding configurator    | 25 Nov 2015 |
 
 # Getting Started
 
