@@ -1,5 +1,5 @@
 # gscs
-Game Server Container Specification
+Game Server Container Specification (BETA)
 
 This project serves as a central respository for Game Server Container Specification schemas, documentation and tooling.
 
